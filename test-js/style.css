@@ -1,0 +1,45 @@
+* {
+	font-family: 'Ubuntu', 'Arial Narrow', Arial, sans-serif;
+	color: #003f56;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #01628524;
+	margin: 0;
+	padding: 0;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 40%;
+}
+
+select {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	padding: 5px 10px;
+	border: 1px solid #016285;
+	border-radius: 8px;
+}
+
+.form__button {
+	margin-left: auto;
+}
+
+button {
+	padding: 5px 10px;
+	border: 1px solid #016285;
+	border-radius: 8px;
+	background-color: #0162853c;
+	align-self: center;
+}
