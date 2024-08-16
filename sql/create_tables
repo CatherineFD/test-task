@@ -1,0 +1,50 @@
+CREATE DATABASE DataBaseContainers;
+
+CREATE TABLE Containers (
+	id INT PRIMARY KEY IDENTITY(1, 1),
+	number INT not null,
+	type NVARCHAR(50),
+	length DECIMAL(10, 2) not null,
+	width DECIMAL(10, 2) not null,
+	height DECIMAL(10, 2) not null,
+	weigth DECIMAL(10, 2) not null,
+	is_empty BIT DEFAULT 0,
+	date_receipt DATETIME
+);
+
+CREATE TABLE Operations (
+	id INT PRIMARY KEY IDENTITY(1, 1),
+	id_container INT,
+	data_start DATETIME,
+	data_finish DATETIME,
+	type_operation NVARCHAR(50),
+	full_name_operator NVARCHAR(150),
+	place_inspection NVARCHAR(500),
+	CONSTRAINT  FK_Operations_Containers FOREIGN KEY (id_container) REFERENCES Containers(id)
+);
+
+SELECT 
+'{' +
+	'"Id": "' + CONVERT(NVARCHAR(36), id) + '",' +
+	'"Number": "' + CONVERT(NVARCHAR(10), number) + '",' +
+	'"Type": "' + type + '",' +
+	'"Length": "' + CONVERT(NVARCHAR(10), length) + '",' +
+	'"Width": "' + CONVERT(NVARCHAR(10), width) + '",' +
+	'"Height": "' + CONVERT(NVARCHAR(10), height) + '",' +
+	'"Weigth": "' + CONVERT(NVARCHAR(10), weigth) + '",' +
+	'"IsEmpty": "' + CASE WHEN is_empty = 1 THEN 'true' ELSE 'false' END + '",' +
+	'"DateReceipt": "' + CONVERT(NVARCHAR(20), date_receipt, 120) + '",' +
+'}' AS ContainersJSON
+FROM Containers;
+
+SELECT 
+'{' +
+	'"Id": "' + CONVERT(NVARCHAR(36), id) + '",' +
+	'"IdContainer": "' + CONVERT(NVARCHAR(36), id_container) + '",' +
+	'"DateStart": "' + CONVERT(NVARCHAR(20), data_start, 120) + '",' +
+	'"DateFinish": "' + CONVERT(NVARCHAR(20), data_finish, 120) + '",' +
+	'"TypeOperation": "' + type_operation + '",' +
+	'"FullNameOperator": "' + type_operation + '",' +
+	'"PlaceInspection": "' + place_inspection + '",' +
+'}' AS OperationsJSON
+FROM Operations;
